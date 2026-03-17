@@ -24,7 +24,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  quick_payment: ^0.0.4
+  quick_payment: ^0.0.5
 ```
 
 Then run:
