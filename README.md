@@ -86,11 +86,11 @@ The email is required, while phone number and ticket URL are optional.
 final support = QuickPaySupportCredentials(
   phoneNumber: '+880123456789',      // Optional
   email: 'hello@khalidlikhon.me',    // Required
-  ticketUrl: 'https://khalidlikhon.me', // Optional
+  ticketUrl: 'https://support.khalidlikhon.me', // Optional
 );
 ```
 
-Pass it to `QuickPay.createPayment `:
+Pass it to `QuickPay.createPayment`:
 
 ```dart
   supportCredentials: support, 
