@@ -85,7 +85,7 @@ The email is required, while phone number and ticket URL are optional.
 ```dart
 final support = QuickPaySupportCredentials(
   phoneNumber: '+880123456789',      // Optional
-  email: 'hello@khalidlikhon.me',    // Required
+  email: 'support@khalidlikhon.me',    // Required
   ticketUrl: 'https://support.khalidlikhon.me', // Optional
 );
 ```
