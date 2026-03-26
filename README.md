@@ -14,7 +14,9 @@ Easily integrate mobile payment options into your Flutter app with ready-to-use 
 - Includes payment logos in assets
 - Lightweight and well-documented
 - Works with Flutter **>=3.10.0**
-- Provides `PaymentData` callback on submission for DB storage or manual approval
+- Provides `PaymentData` callback on submission for DB storage or manual approval 
+- Optional support section with phone, email, and ticket links
+
 
 ---
 
@@ -24,7 +26,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  quick_payment: ^0.0.5
+  quick_payment: ^1.0.0
 ```
 
 Then run:
@@ -75,7 +77,26 @@ final credentials = QuickPayCredentials(
 
 Replace the numbers with your personal mobile banking numbers to receive payments.
 
-### 4️⃣ Trigger Payment Flow
+### 4️⃣ Optional: Add Support Credentials
+
+If you want to provide a support section inside the payment flow, use `QuickPaySupportCredentials`.
+The email is required, while phone number and ticket URL are optional.
+
+```dart
+final support = QuickPaySupportCredentials(
+  phoneNumber: '+880123456789',      // Optional
+  email: 'hello@khalidlikhon.me',    // Required
+  ticketUrl: 'https://khalidlikhon.me', // Optional
+);
+```
+
+Pass it to `QuickPay.createPayment `:
+
+```dart
+  supportCredentials: support, 
+```
+
+### 5️⃣ Trigger Payment Flow
 
 Call `QuickPay.createPayment()` on button press or action.
 
@@ -85,6 +106,7 @@ QuickPay.createPayment(
   amount: 200, // Payment amount
   customer: customer,
   credentials: credentials,
+  supportCredentials: support, // Optional
   onPaymentSubmitted: (data) {
     // PaymentData returned after user submits
     // Save to your database manually
@@ -142,6 +164,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            
             // Customer Details
             final customer = CustomerDetails(
               fullName: 'Khalid LikhOn',
@@ -159,16 +182,23 @@ class HomePage extends StatelessWidget {
               ],
             );
 
+            // Optional Support Credentials
+            final support = QuickPaySupportCredentials(
+              phoneNumber: '+880123456789',      // Optional
+              email: 'hello@khalidlikhon.me',    // Required
+              ticketUrl: 'https://khalidlikhon.me', // Optional
+            );
+
             // Trigger Payment Flow
             QuickPay.createPayment(
               context: context,
               amount: 200,
               customer: customer,
               credentials: credentials,
+              supportCredentials: support, // Optional
               onPaymentSubmitted: (data) {
-                // Returned PaymentData
+                // PaymentData returned after submission
                 print(data.toMap());
-                // Save to DB manually, status = "pending"
               },
             );
           },
